@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="php," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="一只叫coco的喵">
+<meta name="description" content="自动加载的用处举个栗子，当我们在Class A中使用另一个类如 Class B时，必须要先引入B这个类的文件。 用require,include可以实现引入文件，但是当项目文件变多了以后就不好管理了，所以有了命名空间。自动加载的基础就是命名空间，如果你的代码符合PSR-4规范，就可以用spl_autoload_register实现自动加载  1.__autoload()使用魔术方法 autolo">
 <meta name="keywords" content="php">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cocoCat">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php 2种类的自动加载机制">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/php-2种类的自动加载机制/index.html">
 <meta property="og:site_name" content="cocoCat">
-<meta property="og:description" content="一只叫coco的喵">
+<meta property="og:description" content="自动加载的用处举个栗子，当我们在Class A中使用另一个类如 Class B时，必须要先引入B这个类的文件。 用require,include可以实现引入文件，但是当项目文件变多了以后就不好管理了，所以有了命名空间。自动加载的基础就是命名空间，如果你的代码符合PSR-4规范，就可以用spl_autoload_register实现自动加载  1.__autoload()使用魔术方法 autolo">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-31T10:26:36.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cocoCat">
-<meta name="twitter:description" content="一只叫coco的喵">
+<meta name="twitter:title" content="php 2种类的自动加载机制">
+<meta name="twitter:description" content="自动加载的用处举个栗子，当我们在Class A中使用另一个类如 Class B时，必须要先引入B这个类的文件。 用require,include可以实现引入文件，但是当项目文件变多了以后就不好管理了，所以有了命名空间。自动加载的基础就是命名空间，如果你的代码符合PSR-4规范，就可以用spl_autoload_register实现自动加载  1.__autoload()使用魔术方法 autolo">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/31/php-2种类的自动加载机制/"/>
 
 
 
 
 
-  <title>cocoCat</title>
+  <title>php 2种类的自动加载机制 | cocoCat</title>
   
 
 
@@ -149,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,9 +243,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -275,9 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/31/php-2种类的自动加载机制/" itemprop="url">php 2种类的自动加载机制</a></h1>
+          <h1 class="post-title" itemprop="name headline">php 2种类的自动加载机制</h1>
         
 
         <div class="post-meta">
@@ -346,19 +344,23 @@
       
 
       
-        
-          
-          
-自动加载的用处举个栗子，当我们在Class A中使用另一个类如 Class B时，必须要先引入B这
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/31/php-2种类的自动加载机制/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <hr>
+<h4 id="自动加载的用处"><a href="#自动加载的用处" class="headerlink" title="自动加载的用处"></a>自动加载的用处</h4><p>举个栗子，当我们在Class A中使用另一个类如 Class B时，必须要先引入B这个类的文件。</p>
+<p>用require,include可以实现引入文件，但是当项目文件变多了以后就不好管理了，所以有了命名空间。自动加载的基础就是命名空间，如果你的代码符合<strong>PSR-4规范</strong>，就可以用spl_autoload_register实现自动加载</p>
+<hr>
+<h5 id="1-autoload"><a href="#1-autoload" class="headerlink" title="1.__autoload()"></a>1.__autoload()</h5><p>使用魔术方法 <strong>autoload()是最简单的方法，<strong>当需要使用的类没有被引入时，这个函数会在PHP报错前被触发，未定义的类名会被当作参数传入。</strong>,一个程序如果存在多个</strong>autoload()会报错。</p>
+<p>举个栗子 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件目录结果</span><br><span class="line">├── Test</span><br><span class="line">│   └── Object.php</span><br><span class="line">└── index.php</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Object.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Base</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Loader</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">autoload</span><span class="params">($class)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $file = str_replace(<span class="string">'\\'</span>,<span class="string">'/'</span>,BASE_PATH . <span class="string">'/'</span> . $class . <span class="string">'.php'</span>);</span><br><span class="line">        <span class="keyword">include</span> $file;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>index.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">define(<span class="string">'BASE_PATH'</span>,<span class="keyword">__DIR__</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__autoload</span><span class="params">($class)</span></span>&#123;</span><br><span class="line">    $file = str_replace(<span class="string">'\\'</span>,<span class="string">'/'</span>,BASE_PATH . <span class="string">'/'</span> . $class . <span class="string">'.php'</span>);</span><br><span class="line">    <span class="keyword">include</span> $file;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> \Test\Object();</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">22222</span><br></pre></td></tr></table></figure></p>
+<h5 id="2-spl-autoload-register"><a href="#2-spl-autoload-register" class="headerlink" title="2.spl_autoload_register()"></a>2.spl_autoload_register()</h5><p>spl_autoload_register 函数的功能就是把传入的函数（参数可以为回调函数或函数名称形式）注册到 SPL <strong>autoload 函数队列中，并移除系统默认的 </strong>autoload() 函数。可以使用这个函数实现多个__autoload()的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">------</span><br><span class="line">index.php</span><br><span class="line">```php</span><br><span class="line">define(&apos;BASE_PATH&apos;,__DIR__);</span><br><span class="line">function autoload($class)&#123;</span><br><span class="line">    $file = str_replace(&apos;\\&apos;,&apos;/&apos;,BASE_PATH . &apos;/&apos; . $class . &apos;.php&apos;);</span><br><span class="line">    include $file;</span><br><span class="line">&#125;</span><br><span class="line">spl_autoload_register(&apos;autoload&apos;);//注册autoload 到自动加载</span><br><span class="line">new Test\Object();</span><br></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">22222</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -366,6 +368,12 @@
     
 
     <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
       
     </div>
 
@@ -378,14 +386,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -395,10 +409,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -406,6 +421,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -426,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,6 +510,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动加载的用处"><span class="nav-number">1.</span> <span class="nav-text">自动加载的用处</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-autoload"><span class="nav-number">1.1.</span> <span class="nav-text">1.__autoload()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-spl-autoload-register"><span class="nav-number">1.2.</span> <span class="nav-text">2.spl_autoload_register()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -629,6 +673,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
